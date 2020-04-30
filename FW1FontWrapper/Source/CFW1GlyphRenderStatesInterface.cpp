@@ -73,7 +73,10 @@ void STDMETHODCALLTYPE CFW1GlyphRenderStates::SetStates(ID3D11DeviceContext *pCo
 	}
 	
 	pContext->OMSetBlendState(m_pBlendState, NULL, 0xffffffff);
-	pContext->OMSetDepthStencilState(m_pDepthStencilState, 0);
+
+    if((Flags & FW1_NODEPTHSTENCIL) == 0) {
+        pContext->OMSetDepthStencilState(m_pDepthStencilState, 0);
+    }
 	
 	pContext->RSSetState(m_pRasterizerState);
 	
